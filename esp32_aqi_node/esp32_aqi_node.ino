@@ -4,6 +4,7 @@
 #include <WebSocketsClient.h>
 #include <WiFi.h>
 #include <Wire.h>
+#include <esp_wifi.h>
 
 // CRITICAL: Disable brownout detector to prevent resets on adapter power
 #include "soc/rtc_cntl_reg.h"
@@ -99,8 +100,8 @@ void setup() {
   WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0);
 
   Serial.begin(115200);
-  delay(
-      3000); // IMPORTANT: Longer delay for power rail stabilization on adapter
+  delay(5000); // CRITICAL: 5 second delay for adapter capacitor charging &
+               // voltage stabilization
   Serial.println("\n\n=============================");
   Serial.println("Antigravity AQI Node v1.0");
   Serial.println("=============================");
@@ -141,6 +142,15 @@ void setup() {
   delay(1000);           // Let the radio fully reset
   WiFi.mode(WIFI_STA);
   WiFi.setAutoReconnect(true); // Auto-reconnect if connection drops
+
+  // CRITICAL: Reduce WiFi TX power to prevent current spikes on adapter power
+  // Default is 20dBm (100mW) which causes 300-500mA spikes.
+  // 8dBm (~6mW) is enough for short-range home WiFi and much more stable.
+  WiFi.setTxPower(WIFI_POWER_8_5dBm);
+
+  // Disable modem sleep to prevent erratic power draw patterns
+  esp_wifi_set_ps(WIFI_PS_NONE);
+
   WiFi.begin(ssid, password);
 
   int attempts = 0;
