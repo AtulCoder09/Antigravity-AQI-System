@@ -5,7 +5,6 @@
 #include <WiFi.h>
 #include <Wire.h>
 
-
 // CRITICAL: Disable brownout detector to prevent resets on adapter power
 #include "soc/rtc_cntl_reg.h"
 #include "soc/soc.h"
@@ -19,14 +18,14 @@ const int PIN_MQ135 = 34;
 const int PIN_MQ8 = 35;
 const int PIN_MQ9 = 32;
 const int PIN_DUST = 33;
-const int PIN_DHT = 26; // DHT11 Data Pin
+const int PIN_DHT = 4; // DHT11 Data Pin
 
 #define DHTTYPE DHT11
 
 // Outputs & Indicators
-const int PIN_FAN_PWM = 25; // 12V Relay/MOSFET for Exhaust Fan
-const int PIN_WIFI_LED = 2; // WiFi Status LED
-const int PIN_ML_LED = 4;   // ML Alert LED
+const int PIN_FAN_PWM = 26;  // 12V Relay/MOSFET for Exhaust Fan
+const int PIN_WIFI_LED = 18; // WiFi Status LED
+const int PIN_ML_LED = 19;   // ML Alert LED
 
 // ==========================================
 // 2. CONFIGURATION & THRESHOLDS
