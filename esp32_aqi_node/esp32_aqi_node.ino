@@ -35,9 +35,9 @@ const int PIN_ML_LED = 19;   // ML Alert LED
 const char *ssid = "ESP32Dev";
 const char *password = "12345678";
 
-// WebSocket Server Settings (FastAPI Backend)
-const char *ws_host = "10.88.65.189"; // <-- YOUR PC's local IP address
-const uint16_t ws_port = 8000;        // FastAPI backend port
+// WebSocket Server Settings (FastAPI Backend on Render)
+const char *ws_host = "antigravity-aqi-backend.onrender.com";
+const uint16_t ws_port = 443; // HTTPS/WSS port
 const char *ws_path = "/ws/edge-node";
 
 // Failsafe Thresholds (Raw analog threshold for testing)
@@ -173,8 +173,8 @@ void setup() {
   }
 
   // Initialize WebSocket connection (will auto-reconnect)
-  Serial.printf("[WS] Target: %s:%d%s\n", ws_host, ws_port, ws_path);
-  webSocket.begin(ws_host, ws_port, ws_path);
+  Serial.printf("[WS] Target: wss://%s:%d%s\n", ws_host, ws_port, ws_path);
+  webSocket.beginSSL(ws_host, ws_port, ws_path);
   webSocket.onEvent(webSocketEvent);
   webSocket.setReconnectInterval(5000);
 
