@@ -1,4 +1,4 @@
-# Antigravity IoT AQI System
+# IoT AQI Monitoring System
 
 This repository contains the complete "Winning Stack" for a professional IoT Edge Node project.
 
