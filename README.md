@@ -17,7 +17,7 @@ python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 python main.py
-# Server runs on http://localhost:8000
+
 ```
 
 ### 2. Frontend (Next.js Dashboard)
@@ -31,7 +31,7 @@ npm i recharts lucide-react
 
 # Replace the generatd app/page.tsx with the provided frontend/app/page.tsx
 npm run dev
-# Dashboard runs on http://localhost:3000
+
 ```
 
 ### 3. ESP32 Node
