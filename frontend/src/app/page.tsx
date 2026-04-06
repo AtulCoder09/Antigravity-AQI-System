@@ -37,7 +37,8 @@ export default function Dashboard() {
 
     useEffect(() => {
         // Connect to FastAPI WebSocket
-        ws.current = new WebSocket("ws://localhost:8000/ws/dashboard");
+        const wsUrl = process.env.NEXT_PUBLIC_WS_URL || "wss://antigravity-aqi-backend.onrender.com/ws/dashboard";
+        ws.current = new WebSocket(wsUrl);
 
         ws.current.onopen = () => {
             console.log("Connected to AQI Intelligence Layer");
