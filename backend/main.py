@@ -11,7 +11,7 @@ import numpy as np
 # import joblib
 # model = joblib.load("aqi_anomaly_model.pkl")
 
-app = FastAPI(title="Antigravity AQI Intelligence Layer")
+app = FastAPI(title="AQI Intelligence Layer")
 
 app.add_middleware(
     CORSMiddleware,
